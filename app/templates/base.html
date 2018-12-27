@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    {% if tilte %}
+    <title>{{ title }} - Microblog</title>
+    {% else %}
+    <title>Microblog</title>
+    {% endif %}
+  </head>
+  <body>
+    <div>Microblog: Personal
+      <a href="/">Home</a>
+      <a href="/login">Sign In</a>
+    </div>
+    <hr>
+    {% block content %}{% endblock %}
+  </body>
+</html>
