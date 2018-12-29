@@ -5,6 +5,8 @@ from app.models import User
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
 
+# all edits from now on are part of Fork #1. Past the original login template.
+
 @app.route('/')
 @app.route('/index')
 @login_required
