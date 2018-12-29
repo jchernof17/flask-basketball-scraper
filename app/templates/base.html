@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    {% if tilte %}
+    {% if title %}
     <title>{{ title }} - Microblog</title>
     {% else %}
     <title>Microblog</title>
@@ -14,7 +14,11 @@
   <body>
     <div>Microblog: Personal
       <a href="{{ url_for('index') }}">Home</a>
+      {% if current_user.is_anonymous %}
       <a href="{{ url_for('login') }}">Sign In</a>
+      {% else %}
+      <a href="{{ url_for('logout') }}">Log Out</a>
+      {% endif %}
     </div>
 
     <hr>
