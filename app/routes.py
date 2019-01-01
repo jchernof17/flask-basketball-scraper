@@ -18,7 +18,7 @@ def before_request():
 
 @app.route('/')
 @app.route('/index')
-@login_required
+# @login_required
 def index():
     #user = {'username' : 'jc.penny7'}
     posts = [
@@ -90,3 +90,7 @@ def edit_profile():
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me
     return render_template('edit_profile.html',title = 'Edit Profile',form=form)
+
+@app.route('/values')
+def values():
+    return render_template('values.html', title = 'Values')
