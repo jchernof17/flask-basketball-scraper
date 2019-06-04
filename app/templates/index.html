@@ -18,4 +18,30 @@
     {% endfor %}
   </tbody>
 </table>
+<h1>Find Game Stats</h1>
+<h4><em>Enter the date of any NBA Basketball Game and get statistics from all players on that date.</em></h4>
+<form class="" action="" method=POST novalidate>
+  {{ form.hidden_tag() }}
+  <p>
+      {{ form.day.label }}<br>
+      {{ form.day(size=64) }}<br>
+      {% for error in form.day.errors %}
+      <span style = 'color:red;'>[{{ error }}]</span>
+      {% endfor %}
+  </p>
+  <p>
+      {{ form.month.label }}<br>
+      {{ form.month(size=64) }}<br>
+      {% for error in form.month.errors %}
+      <span style = 'color:red;'>[{{ error }}]</span>
+      {% endfor %}
+  </p>
+  <p>
+      {{ form.year.label }}<br>
+      {{ form.year(size=64) }}<br>
+      {% for error in form.year.errors %}
+      <span style = 'color:red;'>[{{ error }}]</span>
+      {% endfor %}
+  </p>
+  <p>{{ form.submit() }}</p>
 {% endblock %}

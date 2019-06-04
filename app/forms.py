@@ -1,6 +1,6 @@
 #wtf forms
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, IntegerField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length
 from app.models import User
 
@@ -30,3 +30,9 @@ class EditProfileForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     about_me = TextAreaField('About me',validators=[Length(min=0,max=140)])
     submit = SubmitField('Submit')
+
+class GameForm(FlaskForm):
+    day = IntegerField('Day', validators=[DataRequired()])
+    month = IntegerField('Month', validators=[DataRequired()])
+    year = IntegerField('Year', validators=[DataRequired()])
+    submit = SubmitField('Get Stats')

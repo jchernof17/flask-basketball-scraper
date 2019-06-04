@@ -2,9 +2,10 @@ from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
-from app.forms import LoginForm, RegistrationForm, EditProfileForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, GameForm
 from werkzeug.urls import url_parse
 from datetime import datetime
+from app import Basketball
 
 # all edits from now on are part of Fork #1. Past the original login template.
 
@@ -16,8 +17,8 @@ def before_request():
         db.session.commit()
 
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods = ['GET', 'POST'])
+@app.route('/index', methods = ['GET', 'POST'])
 # @login_required
 def index():
     #user = {'username' : 'jc.penny7'}
@@ -30,7 +31,14 @@ def index():
     {'name':'Molly','date':'6/20/2018','value':16},
 
     ]
-    return render_template('index.html', title = 'Home', posts=posts)
+    game_form = GameForm()
+    if game_form.validate_on_submit():
+
+        # load the data
+        game = Basketball.Game([game_form.day.data, game_form.month.data, game_form.year.data])
+        table = game.createTableRows()
+        return render_template('game.html', data=table)
+    return render_template('index.html', title = 'Home', posts=posts, form = game_form)
 
 @app.route('/login',methods = ['GET','POST'])
 def login():
@@ -75,6 +83,7 @@ def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     posts = [{'author':user,'body':'Test post #1'} , {'author':user,'body':'Test post #2'}]
     return render_template('user.html', user=user, posts=posts)
+
 
 @app.route('/edit_profile',methods=['GET','POST'])
 @login_required
